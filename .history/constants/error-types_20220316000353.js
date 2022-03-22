@@ -1,0 +1,1 @@
+const NAME_REGISTER_ERROR = 
