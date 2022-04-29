@@ -51,18 +51,7 @@ class articleController {
       // 返回数据
       ctx.body = {
         returnCode: "0000",
-        data: result[0],
-      };
-    }
-  }
-
-  async getArticleByUserId(ctx, next) {
-    const { id } = ctx.params;
-    const result = await service.getArticleByUserId(id);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
+        data: result[0][0],
       };
     }
   }

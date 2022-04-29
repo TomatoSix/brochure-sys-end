@@ -57,8 +57,7 @@ class articleController {
   }
 
   async getArticleByUserId(ctx, next) {
-    const { id } = ctx.params;
-    const result = await service.getArticleByUserId(id);
+    const result = await service.getArticleByUserId();
     if (result.length) {
       ctx.body = {
         returnCode: "0000",

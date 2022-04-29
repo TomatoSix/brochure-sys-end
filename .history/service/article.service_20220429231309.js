@@ -51,7 +51,7 @@ class articleService {
    * @returns {any}
    */
   async getArticleByUserId(id) {
-    const statement = `SELECT  a.title title, a.content content, a.digest digest,a.likes likes, 
+    const statement = `SELECT  a.title title, a.content content, a.likes likes, 
     a.comments comments, u.name authorName, a.createAt createTime  
       FROM users u RIGHT JOIN article a  ON u.id = a.user_id
       WHERE u.id = ?`;

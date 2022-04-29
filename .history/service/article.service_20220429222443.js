@@ -37,25 +37,8 @@ class articleService {
    * @returns {any}
    */
   async getArticleDataAll() {
-    const statement = `SELECT a.articleId articleId, a.digest digest, u.name authorName, 
-    a.title title, a.content content, a.likes likes, a.comments comments 
-    FROM  users u RIGHT JOIN article a on u.id = a.user_id;`;
+    const statement = `SELECT a.articleId articleId, a.digest digest, u.name authorName, a.title title, a.content content, a.likes likes, a.comments comments FROM  users u RIGHT JOIN article a on u.id = a.user_id;`;
     const result = await connection.execute(statement);
-    return result;
-  }
-
-  /**
-   * @desc 获取登录用户的所有文章
-   * @date 2022-04-29
-   * @param {any} id
-   * @returns {any}
-   */
-  async getArticleByUserId(id) {
-    const statement = `SELECT  a.title title, a.content content, a.digest digest,a.likes likes, 
-    a.comments comments, u.name authorName, a.createAt createTime  
-      FROM users u RIGHT JOIN article a  ON u.id = a.user_id
-      WHERE u.id = ?`;
-    const result = await connection.execute(statement, [id]);
     return result;
   }
 }

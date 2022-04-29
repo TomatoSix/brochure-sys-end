@@ -55,17 +55,6 @@ class articleController {
       };
     }
   }
-
-  async getArticleByUserId(ctx, next) {
-    const { id } = ctx.params;
-    const result = await service.getArticleByUserId(id);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
-      };
-    }
-  }
 }
 
 module.exports = new articleController();

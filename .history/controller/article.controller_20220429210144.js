@@ -38,34 +38,7 @@ class articleController {
     }
   }
 
-  /**
-   * @desc 获取所有文章信息
-   * @date 2022-04-29
-   * @param {any} ctx
-   * @param {any} next
-   * @returns {any}
-   */
-  async getArticleAll(ctx, next) {
-    const result = await service.getArticleDataAll();
-    if (result.length) {
-      // 返回数据
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
-      };
-    }
-  }
-
-  async getArticleByUserId(ctx, next) {
-    const { id } = ctx.params;
-    const result = await service.getArticleByUserId(id);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
-      };
-    }
-  }
+  async getArticleAll(ctx, next) {}
 }
 
 module.exports = new articleController();

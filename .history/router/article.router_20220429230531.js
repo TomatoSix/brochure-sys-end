@@ -14,6 +14,6 @@ articleRouter.get("/getArticleById/:id", getArticleById);
 // 获取所有文章
 articleRouter.get("/getArticleAll", getArticleAll);
 // 获取当前用户所有文章
-articleRouter.get("/getArticleByUserId/:id", getArticleByUserId);
+articleRouter.get("/getArticleByUserId", getArticleByUserId);
 
 module.exports = articleRouter;
