@@ -18,13 +18,11 @@ class UserController {
   }
 
   async getUserInfo(ctx, next) {
-    console.log(ctx.params, "query");
-    const { id } = ctx.params;
+    console.log(ctx.query, "query");
+    const { id } = ctx.query;
+    console.log(id, "id");
     const result = await service.getUserById(id);
-    if (result.length) {
-      // 返回数据
-      ctx.body = result[0];
-    }
+    console.log(result, "获取用户信息");
   }
 }
 module.exports = new UserController();

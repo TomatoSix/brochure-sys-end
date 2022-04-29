@@ -23,7 +23,7 @@ class UserController {
     const result = await service.getUserById(id);
     if (result.length) {
       // 返回数据
-      ctx.body = result[0];
+      ctx.body = "注册用户成功";
     }
   }
 }

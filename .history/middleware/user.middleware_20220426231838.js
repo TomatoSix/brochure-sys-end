@@ -24,6 +24,11 @@ const verifyUser = async (ctx, next) => {
   await next();
 };
 
+//
+const verifyUserById = async (ctx, next) => {
+  const result = await service.getUserByName(name);
+};
+
 /**
  * @desc 密码加密处理, 使用md5password
  * @date 2022-03-16
@@ -44,4 +49,5 @@ const handlePassword = async (ctx, next) => {
 module.exports = {
   verifyUser,
   handlePassword,
+  verifyUserById,
 };

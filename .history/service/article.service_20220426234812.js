@@ -1,6 +1,6 @@
 const connection = require("../app/database");
 
-class UserService {
+class articleService {
   /**
    * @desc 创建用户
    * @date 2022-03-15
@@ -43,4 +43,4 @@ class UserService {
   }
 }
 
-module.exports = new UserService();
+module.exports = new articleService();

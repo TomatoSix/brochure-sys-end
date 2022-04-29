@@ -8,7 +8,6 @@ const userRouter = new Router({ prefix: "/users" });
 userRouter.post("/register", verifyUser, handlePassword, create);
 
 // 获取用户信息
-// userRouter.post("/getUserInfo/:id", verifyUserById, getUserInfo);
-userRouter.post("/getUserInfo/:id", getUserInfo);
+userRouter.post("/getUserInfo/:id", verifyUserById, getUserInfo);
 
 module.exports = userRouter;

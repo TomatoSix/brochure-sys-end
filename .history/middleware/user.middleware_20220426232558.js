@@ -44,4 +44,5 @@ const handlePassword = async (ctx, next) => {
 module.exports = {
   verifyUser,
   handlePassword,
+  verifyUserById,
 };

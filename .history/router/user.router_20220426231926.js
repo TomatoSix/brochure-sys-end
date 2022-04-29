@@ -1,6 +1,10 @@
 const Router = require("koa-router");
 const { create, getUserInfo } = require("../controller/user.controller");
-const { verifyUser, handlePassword } = require("../middleware/user.middleware");
+const {
+  verifyUser,
+  handlePassword,
+  verifyUserById,
+} = require("../middleware/user.middleware");
 
 const userRouter = new Router({ prefix: "/users" });
 

@@ -29,16 +29,15 @@ class UserService {
   }
 
   /**
-   * @desc 根据用户ID获取用户信息
+   * @desc 根据用户信息获取用户ID
    * @date 2022-03-16
    * @param {any} name
    * @returns {any}
    */
-  async getUserById(id) {
-    const statement = `SELECT * FROM users WHERE id = ?;`;
+  async getUserByName(name) {
+    const statement = `SELECT * FROM users WHERE name = ?;`;
 
-    const result = await connection.execute(statement, [id]);
-    console.log(result[0], "result");
+    const result = await connection.execute(statement, [name]);
     return result[0];
   }
 }

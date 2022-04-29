@@ -34,11 +34,10 @@ class UserService {
    * @param {any} name
    * @returns {any}
    */
-  async getUserById(id) {
+  async getUserByName(id) {
     const statement = `SELECT * FROM users WHERE id = ?;`;
 
     const result = await connection.execute(statement, [id]);
-    console.log(result[0], "result");
     return result[0];
   }
 }

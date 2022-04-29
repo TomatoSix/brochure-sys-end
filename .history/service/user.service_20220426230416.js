@@ -38,7 +38,6 @@ class UserService {
     const statement = `SELECT * FROM users WHERE id = ?;`;
 
     const result = await connection.execute(statement, [id]);
-    console.log(result[0], "result");
     return result[0];
   }
 }
