@@ -2,7 +2,7 @@ const connection = require("../app/database");
 
 class articleService {
   /**
-   * @desc 创建文章
+   * @desc 创建用户
    * @date 2022-03-15
    * @param {any} user, name:账号, password:密码
    * @returns {any}
@@ -21,35 +21,6 @@ class articleService {
     return result;
   }
 
-  // 修改文章
-  async editPaper(data) {
-    const { content, title, digest, articleId } = data;
-
-    const statement = `update article a set digest=?, content=?, title=? where a.articleId = ?`;
-    const result = await connection.execute(statement, [
-      digest,
-      content,
-      title,
-      articleId,
-    ]);
-    return result;
-  }
-  // 发布文章
-  async emitPaper(data) {
-    const { articleId, digest, content, title, isDraft } = data;
-    console.log(data, "data");
-    const statement = `update article a set digest=?, content=?, title=?, isDraft = ?
-    where a.articleId = ?`;
-    const result = await connection.execute(statement, [
-      digest,
-      content,
-      title,
-      isDraft,
-      articleId,
-    ]);
-    return result;
-  }
-
   /**
    * @desc 根据文章Id获取文章信息
    * @date 2022-04-26
@@ -57,7 +28,7 @@ class articleService {
    * @returns {any}
    */
   async getArticleDataById(id) {
-    const statement = `SELECT a.title title, a.content content, a.digest digest, a.likes likes, a.comments comments, u.name authorName, a.createAt createTime FROM  users u RIGHT JOIN article a on u.id = a.user_id WHERE  a.user_id = u.id and a.articleId = ? `;
+    const statement = `SELECT a.title title, a.content content, a.likes likes, a.comments comments, u.name authorName, a.createAt createTime FROM  users u RIGHT JOIN article a on u.id = a.user_id WHERE  a.user_id = u.id and a.articleId = ? `;
     const result = await connection.execute(statement, [id]);
     return result;
   }
@@ -82,7 +53,7 @@ class articleService {
    * @returns {any}
    */
   async getArticleByUserId(id) {
-    const statement = `SELECT  a.articleId id, a.title title, a.content content, a.digest digest, a.likes likes, 
+    const statement = `SELECT  a.articleId id, a.title title, a.content content, a.digest digest,a.likes likes, 
     a.comments comments, u.name authorName, a.createAt createTime, a.isDraft 
       FROM users u RIGHT JOIN article a  ON u.id = a.user_id
       WHERE u.id = ? order by a.articleId desc`;
@@ -101,10 +72,9 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     } = data;
-    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish, price) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const result = await connection.execute(statement, [
       id,
       headline,
@@ -114,7 +84,6 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     ]);
     if (result.length) {
       console.log("1111", data);
@@ -183,77 +152,23 @@ class articleService {
   async reviseChapterContent(data) {
     const { content, title, sort, chapterId } = data;
     console.log(data, "data");
-    console.log(chapterId, "chapterId");
-    const res = await this.findArticleId(chapterId);
-    let res1 = await this.setChapter(title, sort, chapterId);
-    let res2 = await this.setArticle(content, res[0].articleId);
-    return [res1, res2];
-  }
-
-  // 根据chapterId寻找articleId
-  async findArticleId(id) {
-    const statement = `SELECT a.articleId from article a left join chapter c on c.articleId = a.articleId where c.chapterId = ? `;
-    const result = await connection.execute(statement, [id]);
-    if (result.length) {
-      return result[0];
-    }
-  }
-
-  // 修改chapter表
-  async setChapter(title, sort, chapterId) {
-    const statement = `update chapter set title=?, sort=? where chapterId=?;`;
+    const statement = `update chapter set title= = ?, sort= ? where chapterId = ?;
+    update article set content = ? where articleId = (
+      select articleId from chapter c where c.chapterId = ?)`;
     const result = await connection.execute(statement, [
       title,
       sort,
       chapterId,
+      content,
+      chapterId,
     ]);
-    if (result.length) {
-      return result;
-    }
-  }
-  // 修改article表
-  async setArticle(content, articleId) {
-    const statement = `update article set content=? where articleId = ?`;
-    const result = await connection.execute(statement, [content, articleId]);
-    if (result.length) {
-      return result;
-    }
-  }
-  // 小册发布
-  async brochureEmit(data) {
-    console.log(data, "data");
-    const { brochureId } = data;
-    const statement = `update brochure b set isPublish=1 where b.brochureId = ?`;
-    const result = await connection.execute(statement, [brochureId]);
-    if (result.length) {
-      return result;
-    }
+    console.log(result, "result");
+    return result;
   }
 
-  // 小册购买
-  async purchaseBrochure(data) {
-    const { brochureId, buyer, price } = data;
-    console.log(data, "hello");
-    const statement = `insert into orderlist (brochureId, buyer, price) 
-    VALUES (? ,?, ?)`;
-    const result = await connection.execute(statement, [
-      brochureId,
-      buyer,
-      price,
-    ]);
-    if (result.length) {
-      return result;
-    }
-  }
-
-  // 是否购买小册
-  async isPurchase(data) {
-    const { brochureId, buyer } = data;
-    const statement = `select * from  orderlist WHERE brochureId = '30' and buyer = '26'`;
-    const result = await connection.execute(statement, [brochureId, buyer]);
-    if (result.length) {
-      return result;
-    }
+  async findArticleId() {
+    const statement = `SELECT a.articleId from article a left join chapter c on c.articleId = a.articleId where c.chapterId = ? `;
+    const result = await connection.execute(statement, []);
   }
 }
 

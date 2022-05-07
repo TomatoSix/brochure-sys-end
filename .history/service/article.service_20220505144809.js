@@ -101,10 +101,9 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     } = data;
-    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish, price) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const result = await connection.execute(statement, [
       id,
       headline,
@@ -114,7 +113,6 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     ]);
     if (result.length) {
       console.log("1111", data);
@@ -230,10 +228,8 @@ class articleService {
     }
   }
 
-  // 小册购买
   async purchaseBrochure(data) {
     const { brochureId, buyer, price } = data;
-    console.log(data, "hello");
     const statement = `insert into orderlist (brochureId, buyer, price) 
     VALUES (? ,?, ?)`;
     const result = await connection.execute(statement, [
@@ -241,16 +237,6 @@ class articleService {
       buyer,
       price,
     ]);
-    if (result.length) {
-      return result;
-    }
-  }
-
-  // 是否购买小册
-  async isPurchase(data) {
-    const { brochureId, buyer } = data;
-    const statement = `select * from  orderlist WHERE brochureId = '30' and buyer = '26'`;
-    const result = await connection.execute(statement, [brochureId, buyer]);
     if (result.length) {
       return result;
     }

@@ -22,32 +22,11 @@ class articleService {
   }
 
   // 修改文章
+
   async editPaper(data) {
     const { content, title, digest, articleId } = data;
 
     const statement = `update article a set digest=?, content=?, title=? where a.articleId = ?`;
-    const result = await connection.execute(statement, [
-      digest,
-      content,
-      title,
-      articleId,
-    ]);
-    return result;
-  }
-  // 发布文章
-  async emitPaper(data) {
-    const { articleId, digest, content, title, isDraft } = data;
-    console.log(data, "data");
-    const statement = `update article a set digest=?, content=?, title=?, isDraft = ?
-    where a.articleId = ?`;
-    const result = await connection.execute(statement, [
-      digest,
-      content,
-      title,
-      isDraft,
-      articleId,
-    ]);
-    return result;
   }
 
   /**
@@ -101,10 +80,9 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     } = data;
-    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish, price) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const result = await connection.execute(statement, [
       id,
       headline,
@@ -114,7 +92,6 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     ]);
     if (result.length) {
       console.log("1111", data);
@@ -225,32 +202,6 @@ class articleService {
     const { brochureId } = data;
     const statement = `update brochure b set isPublish=1 where b.brochureId = ?`;
     const result = await connection.execute(statement, [brochureId]);
-    if (result.length) {
-      return result;
-    }
-  }
-
-  // 小册购买
-  async purchaseBrochure(data) {
-    const { brochureId, buyer, price } = data;
-    console.log(data, "hello");
-    const statement = `insert into orderlist (brochureId, buyer, price) 
-    VALUES (? ,?, ?)`;
-    const result = await connection.execute(statement, [
-      brochureId,
-      buyer,
-      price,
-    ]);
-    if (result.length) {
-      return result;
-    }
-  }
-
-  // 是否购买小册
-  async isPurchase(data) {
-    const { brochureId, buyer } = data;
-    const statement = `select * from  orderlist WHERE brochureId = '30' and buyer = '26'`;
-    const result = await connection.execute(statement, [brochureId, buyer]);
     if (result.length) {
       return result;
     }

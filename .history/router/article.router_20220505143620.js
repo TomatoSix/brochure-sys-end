@@ -15,7 +15,6 @@ const {
   brochureEmit,
   emitPaper,
   purchaseBrochure,
-  isPurchase,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 
@@ -55,7 +54,5 @@ articleRouter.post("/emitPaper", emitPaper);
 
 // 购买小册
 articleRouter.post("/purchaseBrochure", purchaseBrochure);
-// 是否购买
-articleRouter.post("/isPurchase", isPurchase);
 
 module.exports = articleRouter;

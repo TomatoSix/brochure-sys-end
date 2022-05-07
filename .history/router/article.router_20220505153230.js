@@ -15,7 +15,6 @@ const {
   brochureEmit,
   emitPaper,
   purchaseBrochure,
-  isPurchase,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 

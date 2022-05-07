@@ -9,24 +9,6 @@ class articleController {
     // 如果数据插入成功
     if (result.length) {
       // 返回数据
-      ctx.body = { returnCode: "0000", data: "文章创建成功" };
-    }
-  }
-
-  /**
-   * @desc 修改文章
-   * @date 2022-05-03
-   * @param {any} ctx
-   * @param {any} next
-   * @returns {any}
-   */
-  async editPaper(ctx, next) {
-    const data = ctx.request.body;
-    const result = await service.editPaper(data);
-    console.log(result, "111111");
-    // 如果数据插入成功
-    if (result.length) {
-      // 返回数据
       ctx.body = { returnCode: "0000", data: "文章保存成功" };
     }
   }
@@ -176,73 +158,7 @@ class articleController {
     if (result.length) {
       ctx.body = {
         returnCode: "0000",
-        data: "修改成功",
-      };
-    }
-  }
-
-  // 小册发布
-  async brochureEmit(ctx, next) {
-    const data = ctx.request.body;
-    console.log(data, "data1");
-    const result = await service.brochureEmit(data);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: "小册发布成功",
-      };
-    }
-  }
-  // 文章发布
-  async emitPaper(ctx, next) {
-    const data = ctx.request.body;
-    const result = await service.emitPaper(data);
-    console.log(result, "result");
-
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: "文章发布成功",
-      };
-    }
-  }
-
-  // 购买小册
-  async purchaseBrochure(ctx, next) {
-    const data = ctx.request.body;
-    console.log(data, "999");
-    const result = await service.purchaseBrochure(data);
-
-    console.log(result, "result");
-
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: "购买成功",
-      };
-    }
-  }
-  // 是否购买
-  async isPurchase(ctx, next) {
-    const data = ctx.request.body;
-    console.log(data, "999");
-    const result = await service.isPurchase(data);
-
-    console.log(result, "result");
-
-    if (result[0].length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 1,
-        },
-      };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 0,
-        },
+        data: result[0],
       };
     }
   }

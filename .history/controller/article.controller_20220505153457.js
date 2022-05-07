@@ -230,19 +230,10 @@ class articleController {
 
     console.log(result, "result");
 
-    if (result[0].length) {
+    if (result.length) {
       ctx.body = {
         returnCode: "0000",
-        data: {
-          isPurchase: 1,
-        },
-      };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 0,
-        },
+        data: "购买成功",
       };
     }
   }

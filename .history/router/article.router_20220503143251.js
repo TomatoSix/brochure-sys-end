@@ -1,7 +1,6 @@
 const Router = require("koa-router");
 const {
   createArticle,
-  editPaper,
   getArticleById,
   getArticleAll,
   getArticleByUserId,
@@ -13,16 +12,13 @@ const {
   addChapter,
   reviseChapterContent,
   brochureEmit,
-  emitPaper,
-  purchaseBrochure,
-  isPurchase,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 
 // 创建文章
 articleRouter.post("/savePaper", createArticle);
 // 修改文章
-articleRouter.post("/editPaper", editPaper);
+articleRouter.post("/editPaper", createArticle);
 
 // 根据文章Id获取文章信息
 articleRouter.get("/getArticleById/:id", getArticleById);
@@ -50,12 +46,5 @@ articleRouter.post("/addChapter", addChapter);
 articleRouter.post("/reviseChapterContent", reviseChapterContent);
 // 小册发布
 articleRouter.post("/brochureEmit", brochureEmit);
-// 文章发布
-articleRouter.post("/emitPaper", emitPaper);
-
-// 购买小册
-articleRouter.post("/purchaseBrochure", purchaseBrochure);
-// 是否购买
-articleRouter.post("/isPurchase", isPurchase);
 
 module.exports = articleRouter;

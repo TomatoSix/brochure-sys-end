@@ -233,16 +233,7 @@ class articleController {
     if (result[0].length) {
       ctx.body = {
         returnCode: "0000",
-        data: {
-          isPurchase: 1,
-        },
-      };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 0,
-        },
+        data: result,
       };
     }
   }

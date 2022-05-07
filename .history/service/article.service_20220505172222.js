@@ -103,8 +103,8 @@ class articleService {
       isPublish,
       price,
     } = data;
-    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish, price) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const statement = `INSERT INTO brochure (user_id, headline, theme, introduce, outline, authorName, authorIntroduction, isPublish) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const result = await connection.execute(statement, [
       id,
       headline,
@@ -114,7 +114,6 @@ class articleService {
       authorName,
       authorIntroduction,
       isPublish,
-      price,
     ]);
     if (result.length) {
       console.log("1111", data);

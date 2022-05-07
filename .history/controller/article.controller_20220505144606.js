@@ -210,39 +210,13 @@ class articleController {
   // 购买小册
   async purchaseBrochure(ctx, next) {
     const data = ctx.request.body;
-    console.log(data, "999");
     const result = await service.purchaseBrochure(data);
-
     console.log(result, "result");
 
     if (result.length) {
       ctx.body = {
         returnCode: "0000",
         data: "购买成功",
-      };
-    }
-  }
-  // 是否购买
-  async isPurchase(ctx, next) {
-    const data = ctx.request.body;
-    console.log(data, "999");
-    const result = await service.isPurchase(data);
-
-    console.log(result, "result");
-
-    if (result[0].length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 1,
-        },
-      };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: {
-          isPurchase: 0,
-        },
       };
     }
   }
