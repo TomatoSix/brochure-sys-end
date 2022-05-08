@@ -284,12 +284,7 @@ class articleService {
   async brochureBought(id) {
     const statement = `select b.brochureId brochureId, b.headline headline, b.introduce introduce 
     from brochure b where b.brochureId = (
-    select o.brochureId from orderlist o where o.buyer = ?)`;
-    const result = await connection.execute(statement, [id]);
-    console.log(result, "result6");
-    if (result.length) {
-      return result[0];
-    }
+    select o.brochureId from orderlist o where o.seller = 1)`;
   }
 }
 

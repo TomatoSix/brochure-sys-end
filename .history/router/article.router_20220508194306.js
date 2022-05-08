@@ -17,8 +17,7 @@ const {
   purchaseBrochure,
   isPurchase,
   getArticleData,
-  getOrderList,
-  brochureBought,
+  getOrderLIst,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 
@@ -64,10 +63,7 @@ articleRouter.post("/isPurchase", isPurchase);
 // 获取文章的各种数据，总数，点赞总数，评论数，收藏数
 articleRouter.get("/getArticleData/:id", getArticleData);
 
-// 获取创作者订单列表
-articleRouter.get("/getOrderList/:id", getOrderList);
-
-// 获取用户的购买的小册
-articleRouter.get("/brochureBought/:id", brochureBought);
+// 获取订单列表
+articleRouter.get("/getOrderLIst/:id", getOrderLIst);
 
 module.exports = articleRouter;

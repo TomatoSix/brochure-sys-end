@@ -284,7 +284,7 @@ class articleService {
   async brochureBought(id) {
     const statement = `select b.brochureId brochureId, b.headline headline, b.introduce introduce 
     from brochure b where b.brochureId = (
-    select o.brochureId from orderlist o where o.buyer = ?)`;
+    select o.brochureId from orderlist o where o.seller = ?)`;
     const result = await connection.execute(statement, [id]);
     console.log(result, "result6");
     if (result.length) {

@@ -277,7 +277,8 @@ class articleController {
   // 获取已购买的小册
   async brochureBought(ctx, next) {
     const { id } = ctx.params;
-    const result = await service.brochureBought(id);
+    const result = await service.getOrderList(id);
+    console.log(result, "resl");
     if (result.length) {
       ctx.body = {
         returnCode: "0000",

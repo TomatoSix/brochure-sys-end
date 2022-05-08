@@ -18,7 +18,6 @@ const {
   isPurchase,
   getArticleData,
   getOrderList,
-  brochureBought,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 

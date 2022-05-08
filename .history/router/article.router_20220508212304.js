@@ -18,7 +18,6 @@ const {
   isPurchase,
   getArticleData,
   getOrderList,
-  brochureBought,
 } = require("../controller/article.controller");
 const articleRouter = new Router({ prefix: "/article" });
 
@@ -68,6 +67,7 @@ articleRouter.get("/getArticleData/:id", getArticleData);
 articleRouter.get("/getOrderList/:id", getOrderList);
 
 // 获取用户的购买的小册
-articleRouter.get("/brochureBought/:id", brochureBought);
+
+articleRouter.get("/brochureBought/:id", getOrderList);
 
 module.exports = articleRouter;

@@ -234,12 +234,12 @@ class articleService {
   async purchaseBrochure(data) {
     const { brochureId, buyer, seller } = data;
     console.log(data, "hello");
-    const statement = `insert into orderlist (brochureId, buyer, seller) 
+    const statement = `insert into orderlist (brochureId, buyer, price) 
     VALUES (? ,?, ?)`;
     const result = await connection.execute(statement, [
       brochureId,
       buyer,
-      seller,
+      price,
     ]);
     if (result.length) {
       return result;
@@ -275,16 +275,6 @@ class articleService {
       from orderlist o WHERE o.seller = 1
     )
     `;
-    const result = await connection.execute(statement, [id]);
-    console.log(result, "result6");
-    if (result.length) {
-      return result[0];
-    }
-  }
-  async brochureBought(id) {
-    const statement = `select b.brochureId brochureId, b.headline headline, b.introduce introduce 
-    from brochure b where b.brochureId = (
-    select o.brochureId from orderlist o where o.buyer = ?)`;
     const result = await connection.execute(statement, [id]);
     console.log(result, "result6");
     if (result.length) {

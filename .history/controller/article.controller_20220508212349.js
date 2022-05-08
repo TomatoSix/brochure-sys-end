@@ -277,13 +277,6 @@ class articleController {
   // 获取已购买的小册
   async brochureBought(ctx, next) {
     const { id } = ctx.params;
-    const result = await service.brochureBought(id);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result,
-      };
-    }
   }
 }
 

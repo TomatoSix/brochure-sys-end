@@ -278,6 +278,7 @@ class articleController {
   async brochureBought(ctx, next) {
     const { id } = ctx.params;
     const result = await service.brochureBought(id);
+    console.log(result, "resl");
     if (result.length) {
       ctx.body = {
         returnCode: "0000",

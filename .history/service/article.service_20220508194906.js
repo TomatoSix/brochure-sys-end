@@ -83,7 +83,7 @@ class articleService {
    */
   async getArticleByUserId(id) {
     const statement = `SELECT  a.articleId id, a.title title, a.content content, a.digest digest, a.likes likes, 
-    a.comments comments, u.name authorName, a.createAt createTime, a.isDraft, a.collect collect
+    a.comments comments, u.name authorName, a.createAt createTime, a.isDraft 
       FROM users u RIGHT JOIN article a  ON u.id = a.user_id
       WHERE u.id = ? order by a.articleId desc`;
     const result = await connection.execute(statement, [id]);
@@ -232,14 +232,14 @@ class articleService {
 
   // 小册购买
   async purchaseBrochure(data) {
-    const { brochureId, buyer, seller } = data;
+    const { brochureId, buyer, price } = data;
     console.log(data, "hello");
-    const statement = `insert into orderlist (brochureId, buyer, seller) 
+    const statement = `insert into orderlist (brochureId, buyer, price) 
     VALUES (? ,?, ?)`;
     const result = await connection.execute(statement, [
       brochureId,
       buyer,
-      seller,
+      price,
     ]);
     if (result.length) {
       return result;
@@ -267,28 +267,15 @@ class articleService {
   }
 
   // 获取订单列表
+
   async getOrderList(id) {
-    const statement = `SELECT u.name, b.headline, b.price,  o.createAt from brochure b, 
-    (orderlist o join users u on u.id = o.buyer) 
-    where b.brochureId = (
-      select o.brochureId brochureId  
-      from orderlist o WHERE o.seller = 1
-    )
-    `;
+    const statement = `SELECT b.headline, b.price, u.name, o.createAt from brochure b, users u, orderlist o 
+      where b.brochureId = (
+      select o.brochureId brochureId  from orderlist o WHERE o.seller = ? )`;
     const result = await connection.execute(statement, [id]);
     console.log(result, "result6");
     if (result.length) {
-      return result[0];
-    }
-  }
-  async brochureBought(id) {
-    const statement = `select b.brochureId brochureId, b.headline headline, b.introduce introduce 
-    from brochure b where b.brochureId = (
-    select o.brochureId from orderlist o where o.buyer = ?)`;
-    const result = await connection.execute(statement, [id]);
-    console.log(result, "result6");
-    if (result.length) {
-      return result[0];
+      return result;
     }
   }
 }

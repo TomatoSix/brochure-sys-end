@@ -113,7 +113,6 @@ class articleController {
   // 根据小册id获取小册信息
   async getBrochureById(ctx, next) {
     const { id } = ctx.params;
-    console.log(id, "id");
     const result = await service.getBrochureById(id);
     if (result.length) {
       ctx.body = {
@@ -249,41 +248,10 @@ class articleController {
   // 获取文章各种数据，点赞， 评论，收藏等等
   async getArticleData(ctx, next) {
     const { id } = ctx.params;
+    console.log(id, "id");
 
     const result = await service.getArticleData(id);
-    console.log(result, "result4");
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
-      };
-    }
-  }
-
-  // 获取订单列表
-  async getOrderList(ctx, next) {
-    const { id } = ctx.params;
-    console.log(id, "id");
-    const result = await service.getOrderList(id);
-    console.log(result, "resl");
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result,
-      };
-    }
-  }
-
-  // 获取已购买的小册
-  async brochureBought(ctx, next) {
-    const { id } = ctx.params;
-    const result = await service.brochureBought(id);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result,
-      };
-    }
+    console.log(result);
   }
 }
 
