@@ -346,7 +346,7 @@ class articleService {
     const statement = `select * from article where articleId = (
       select articleId from likes l where l.user_id = ?
     )`;
-    const result = await connection.execute(statement, [userId]);
+    const result = await connection.execute(statement, [count, articleId]);
     if (result.length) {
       return result;
     }

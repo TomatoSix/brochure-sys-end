@@ -22,7 +22,6 @@ const {
   giveLike,
   cancelLike,
   isLike,
-  likeList,
 } = require("../controller/article.controller");
 const {
   getLikeCount,
@@ -87,6 +86,6 @@ articleRouter.post("/cancelLike", getLikeCount, changeLike, cancelLike);
 // 获取改文章是否赞
 articleRouter.post("/isLike", isLike);
 // 获取赞过的列表文章
-articleRouter.get("/likeList/:userId", likeList);
+articleRouter.get("/likeList", isLike);
 
 module.exports = articleRouter;

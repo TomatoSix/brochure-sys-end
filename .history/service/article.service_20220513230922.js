@@ -341,16 +341,6 @@ class articleService {
       return result;
     }
   }
-  // 获取赞过的列表文章
-  async likeList(userId) {
-    const statement = `select * from article where articleId = (
-      select articleId from likes l where l.user_id = ?
-    )`;
-    const result = await connection.execute(statement, [userId]);
-    if (result.length) {
-      return result;
-    }
-  }
 }
 
 module.exports = new articleService();

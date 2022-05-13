@@ -298,27 +298,7 @@ class articleService {
     const statement = `insert into likes (user_id, articleId) 
     VALUES (?, ?)`;
     const result = await connection.execute(statement, [userId, articleId]);
-    if (result.length) {
-      return result;
-    }
-  }
-  // 取消赞
-  async cancelLike(userId, articleId) {
-    const statement = `DELETE FROM likes 
-    WHERE user_id = ? and articleId = ?;`;
-    const result = await connection.execute(statement, [userId, articleId]);
     console.log(result, "result6");
-    if (result.length) {
-      return result;
-    }
-  }
-  // 该文章是否有赞
-  async isLike(params) {
-    const { userId, articleId } = params;
-    const statement = `SELECT likeId FROM likes 
-    WHERE user_id = ? and articleId = ?`;
-    const result = await connection.execute(statement, [userId, articleId]);
-    console.log(result, "999");
     if (result.length) {
       return result[0];
     }
@@ -337,16 +317,6 @@ class articleService {
     const { articleId } = params;
     const statement = `update article a set likes = ? where a.articleId = ?`;
     const result = await connection.execute(statement, [count, articleId]);
-    if (result.length) {
-      return result;
-    }
-  }
-  // 获取赞过的列表文章
-  async likeList(userId) {
-    const statement = `select * from article where articleId = (
-      select articleId from likes l where l.user_id = ?
-    )`;
-    const result = await connection.execute(statement, [userId]);
     if (result.length) {
       return result;
     }

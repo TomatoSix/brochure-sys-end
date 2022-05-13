@@ -21,12 +21,12 @@ const {
   brochureBought,
   giveLike,
   cancelLike,
-  isLike,
-  likeList,
+  getLike,
 } = require("../controller/article.controller");
 const {
   getLikeCount,
   changeLike,
+  decreaseLike,
 } = require("../middleware/article.middleware");
 const articleRouter = new Router({ prefix: "/article" });
 
@@ -81,12 +81,10 @@ articleRouter.get("/brochureBought/:id", brochureBought);
 // 点赞
 articleRouter.post("/giveLike", getLikeCount, changeLike, giveLike);
 
-// 取消赞
+// // 取消赞
 articleRouter.post("/cancelLike", getLikeCount, changeLike, cancelLike);
 
-// 获取改文章是否赞
-articleRouter.post("/isLike", isLike);
-// 获取赞过的列表文章
-articleRouter.get("/likeList/:userId", likeList);
+// // 获取赞
+// articleRouter.post("/getLike", getLike);
 
 module.exports = articleRouter;

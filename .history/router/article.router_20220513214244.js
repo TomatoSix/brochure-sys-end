@@ -19,15 +19,7 @@ const {
   getArticleData,
   getOrderList,
   brochureBought,
-  giveLike,
-  cancelLike,
-  isLike,
-  likeList,
 } = require("../controller/article.controller");
-const {
-  getLikeCount,
-  changeLike,
-} = require("../middleware/article.middleware");
 const articleRouter = new Router({ prefix: "/article" });
 
 // 创建文章
@@ -79,14 +71,6 @@ articleRouter.get("/getOrderList/:id", getOrderList);
 articleRouter.get("/brochureBought/:id", brochureBought);
 
 // 点赞
-articleRouter.post("/giveLike", getLikeCount, changeLike, giveLike);
-
 // 取消赞
-articleRouter.post("/cancelLike", getLikeCount, changeLike, cancelLike);
-
-// 获取改文章是否赞
-articleRouter.post("/isLike", isLike);
-// 获取赞过的列表文章
-articleRouter.get("/likeList/:userId", likeList);
-
+// 获取赞
 module.exports = articleRouter;

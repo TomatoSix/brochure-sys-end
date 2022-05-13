@@ -282,11 +282,6 @@ class articleController {
         returnCode: "0000",
         data: result,
       };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: "暂无购买记录",
-      };
     }
   }
   // 点赞
@@ -294,7 +289,6 @@ class articleController {
     const { userId, articleId } = ctx.request.body;
     const result = await service.giveLike(userId, articleId);
     if (result.length) {
-      console.log("真的好奇怪");
       ctx.body = {
         returnCode: "0000",
         data: true,
@@ -321,17 +315,6 @@ class articleController {
       ctx.body = {
         returnCode: "0000",
         data: result,
-      };
-    }
-  }
-
-  async likeList(ctx, next) {
-    const { userId } = ctx.params;
-    const result = await service.likeList(userId);
-    if (result.length) {
-      ctx.body = {
-        returnCode: "0000",
-        data: result[0],
       };
     }
   }

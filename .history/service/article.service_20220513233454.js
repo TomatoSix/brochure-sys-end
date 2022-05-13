@@ -346,10 +346,6 @@ class articleService {
     const statement = `select * from article where articleId = (
       select articleId from likes l where l.user_id = ?
     )`;
-    const result = await connection.execute(statement, [userId]);
-    if (result.length) {
-      return result;
-    }
   }
 }
 

@@ -282,11 +282,6 @@ class articleController {
         returnCode: "0000",
         data: result,
       };
-    } else {
-      ctx.body = {
-        returnCode: "0000",
-        data: "暂无购买记录",
-      };
     }
   }
   // 点赞
