@@ -277,7 +277,7 @@ class articleService {
         where b.brochureId = 
         (
           select o.brochureId brochureId  
-          from orderlist o WHERE o.seller = ? )
+          from orderlist o WHERE o.seller = 1 )
     `;
     const result = await connection.execute(statement, [id]);
     console.log(result, "result6");

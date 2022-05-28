@@ -261,7 +261,7 @@ class articleController {
     const { id } = ctx.params;
     console.log(id, "id");
     const result = await service.getOrderList(id);
-    // console.log(result, "resl");
+    console.log(result, "resl");
     if (result.length) {
       ctx.body = {
         returnCode: "0000",

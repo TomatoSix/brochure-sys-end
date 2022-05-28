@@ -226,6 +226,8 @@ class articleController {
     const data = ctx.request.body;
     const result = await service.isPurchase(data);
 
+    console.log(result, "result");
+
     if (result[0].length) {
       ctx.body = {
         returnCode: "0000",
@@ -261,7 +263,7 @@ class articleController {
     const { id } = ctx.params;
     console.log(id, "id");
     const result = await service.getOrderList(id);
-    // console.log(result, "resl");
+    console.log(result, "resl");
     if (result.length) {
       ctx.body = {
         returnCode: "0000",

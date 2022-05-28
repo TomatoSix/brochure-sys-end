@@ -272,12 +272,12 @@ class articleService {
   // 获取订单列表
   async getOrderList(id) {
     console.log(id, "id");
-    const statement = `SELECT u.name, b.headline, b.price, o.createAt from brochure b, orderlist o 
-    join users u on u.id = o.buyer 
-        where b.brochureId = 
-        (
-          select o.brochureId brochureId  
-          from orderlist o WHERE o.seller = ? )
+    const statement = `SELECT u.name, b.headline, b.price,  o.createAt from brochure b, 
+    (orderlist o join users u on u.id = o.buyer) 
+    where b.brochureId = (
+      select o.brochureId brochureId  
+      from orderlist o WHERE o.seller = ?
+    )
     `;
     const result = await connection.execute(statement, [id]);
     console.log(result, "result6");
